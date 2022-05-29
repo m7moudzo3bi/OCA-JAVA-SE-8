@@ -1,6 +1,8 @@
 package com.fs.chapter3;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * @author Zo3bi
@@ -153,7 +155,48 @@ public class WorkingWithDatesAndTimes {
 	}
 
 	////////////////////////////////////////////////
+	public static void formattingDatesExample() {
+		LocalDate d1 = LocalDate.of(1997, Month.OCTOBER, 28);
+		DateTimeFormatter isoDate = DateTimeFormatter.ISO_DATE;
+		System.out.println(d1.format(isoDate)); // 1997-10-28
+		
+		DateTimeFormatter df = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+		System.out.println(df.format(d1)); //10/28/97
+		
+		DateTimeFormatter df2 = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+		System.out.println(df2.format(d1)); //Oct 28, 1997
+	}
+
+	////////////////////////////////////////////////
+	public static void formattingTimeExample() {
+		LocalTime t1 = LocalTime.of(11, 11);
+		DateTimeFormatter isoTime = DateTimeFormatter.ISO_TIME;
+		System.out.println(t1.format(isoTime)); //11:11:00
+		
+		DateTimeFormatter dfs = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+		System.out.println(dfs.format(t1)); //11:11 AM
+		
+		DateTimeFormatter df2 = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
+		System.out.println(df2.format(t1)); //11:11:00 AM
+	}
+
+	////////////////////////////////////////////////
+	public static void formattingDateTimeExample() {
+		LocalDate d1 = LocalDate.of(1997, Month.OCTOBER, 28);
+		LocalTime t1 = LocalTime.of(11, 11);
+		LocalDateTime dt = LocalDateTime.of(d1, t1);
+		DateTimeFormatter ft = DateTimeFormatter.ISO_DATE_TIME;
+		System.out.println(dt.format(ft)); // 1997-10-28T11:11:00
+
+		DateTimeFormatter df1 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
+		System.out.println(df1.format(dt)); // 10/28/97, 11:11 AM
+		
+		DateTimeFormatter df2 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+		System.out.println(df2.format(dt)); // Oct 28, 1997, 11:11:00 AM
+	}
+	
+	////////////////////////////////////////////////
 	public static void main(String[] args) {
-		getExample();
+		formattingDateTimeExample();
 	}
 }
