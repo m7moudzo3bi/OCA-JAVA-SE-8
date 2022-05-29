@@ -159,25 +159,25 @@ public class WorkingWithDatesAndTimes {
 		LocalDate d1 = LocalDate.of(1997, Month.OCTOBER, 28);
 		DateTimeFormatter isoDate = DateTimeFormatter.ISO_DATE;
 		System.out.println(d1.format(isoDate)); // 1997-10-28
-		
+
 		DateTimeFormatter df = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
-		System.out.println(df.format(d1)); //10/28/97
-		
+		System.out.println(df.format(d1)); // 10/28/97
+
 		DateTimeFormatter df2 = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-		System.out.println(df2.format(d1)); //Oct 28, 1997
+		System.out.println(df2.format(d1)); // Oct 28, 1997
 	}
 
 	////////////////////////////////////////////////
 	public static void formattingTimeExample() {
 		LocalTime t1 = LocalTime.of(11, 11);
 		DateTimeFormatter isoTime = DateTimeFormatter.ISO_TIME;
-		System.out.println(t1.format(isoTime)); //11:11:00
-		
+		System.out.println(t1.format(isoTime)); // 11:11:00
+
 		DateTimeFormatter dfs = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
-		System.out.println(dfs.format(t1)); //11:11 AM
-		
+		System.out.println(dfs.format(t1)); // 11:11 AM
+
 		DateTimeFormatter df2 = DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM);
-		System.out.println(df2.format(t1)); //11:11:00 AM
+		System.out.println(df2.format(t1)); // 11:11:00 AM
 	}
 
 	////////////////////////////////////////////////
@@ -190,13 +190,39 @@ public class WorkingWithDatesAndTimes {
 
 		DateTimeFormatter df1 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
 		System.out.println(df1.format(dt)); // 10/28/97, 11:11 AM
-		
+
 		DateTimeFormatter df2 = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 		System.out.println(df2.format(dt)); // Oct 28, 1997, 11:11:00 AM
 	}
-	
+
+	////////////////////////////////////////////////
+	public static void ofPatternExample() {
+		// Formatting
+		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		System.out.println(df.format(LocalDate.now())); // 2022-05-29
+
+		DateTimeFormatter df2 = DateTimeFormatter.ofPattern("hh:mm");
+		System.out.println(df2.format(LocalTime.of(11, 11))); // 11:11
+
+		DateTimeFormatter df3 = DateTimeFormatter.ofPattern("yyyy/MMM/dd hh:mm");
+		System.out.println(df3.format(LocalDateTime.of(1997, Month.OCTOBER, 10, 11, 11)));
+		// 1997/Oct/10 11:11
+
+		// --------------------------------
+		// Parsing
+		DateTimeFormatter df4 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate parseDate = LocalDate.parse("1997-10-28", df4);
+		System.out.println(parseDate); // 1997-10-28 LocalDate
+
+		LocalDate parseDateAuto = LocalDate.parse("1997-10-28");
+		System.out.println(parseDateAuto); // 1997-10-28
+
+		LocalTime parseTime = LocalTime.parse("11:05");
+		System.out.println(parseTime);
+	}
+
 	////////////////////////////////////////////////
 	public static void main(String[] args) {
-		formattingDateTimeExample();
+		ofPatternExample();
 	}
 }
